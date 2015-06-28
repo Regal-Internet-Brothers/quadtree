@@ -3,7 +3,6 @@ Strict
 Public
 
 ' Preprocessor related:
-#QUADTREE_SMART_MODE = True ' False
 '#QUADTREE_MOJO2 = True
 
 #If BRL_GAMETARGET_IMPLEMENTED
@@ -102,15 +101,12 @@ Class QuadTree<ItemType> Extends QuadTreeNode<ItemType>
 	
 	' Destructor(s):
 	Method Free:QuadTreeNode<ItemType>()
-		' Call the super-class's implementation.
-		If (Super.Free() = Null) Then Return Null
-		
 		' Set the max number of objects and levels to zero.
 		Self.MaxObjects = Default_MaxObjects
 		Self.MaxLevels = Default_MaxLevels
 		
 		' Return this object so it may be pooled.
-		Return Self
+		Return Super.Free()
 	End
 	
 	' Methods (Public):
@@ -123,7 +119,9 @@ Class QuadTree<ItemType> Extends QuadTreeNode<ItemType>
 	End
 	
 	Method UpdateTrackers:Void()
-		If (Trackers = Null Or Trackers.IsEmpty()) Then Return
+		If (Trackers = Null Or Trackers.IsEmpty()) Then
+			Return
+		Endif
 		
 		For Local OStack:= Eachin Trackers
 			For Local O:= Eachin OStack
