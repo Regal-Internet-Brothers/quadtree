@@ -15,7 +15,6 @@ Public
 ' Imports (Private):
 Private
 
-' Official:
 Import brl.pool
 
 ' Used for debugging purposes:
@@ -27,9 +26,8 @@ Import brl.pool
 	#End
 #End
 
-' Unofficial:
-Import util
-Import polygon
+Import regal.util
+Import regal.polygon
 
 Public
 
